@@ -89,9 +89,11 @@ public class Conta {
         }
     }
     public void pagarMensalidade(){
-        if(this.tipoConta.equals("Conta Corrente")){
+        if(this.tipoConta == null && this.getStatusConta().equals("Fechada")){
+            System.out.println("Abra uma conta primeiro!");
+        }else if(this.tipoConta.equals("Conta Corrente") && this.getStatusConta().equals("Aberta")){
             this.setSaldo(this.getSaldo() - 12);
-        }else if(this.tipoConta.equals("Conta Poupança")){
+        } else if(this.tipoConta.equals("Conta Poupança") && this.getStatusConta().equals("Aberta")){
             this.setSaldo(this.getSaldo() - 20);
         }
     }
