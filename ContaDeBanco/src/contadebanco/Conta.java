@@ -54,11 +54,11 @@ public class Conta {
         this.numConta = Math.round(random() * 10000000);
         if(tipoContaEn.equals("Conta Corrente")){
             this.tipoConta = "Conta Corrente";
-            this.saldo = 50;
+            this.setSaldo(this.getSaldo() + 50);
         }
         if(tipoContaEn.equals("Conta Poupança")){
             this.tipoConta = "Conta Poupança";
-            this.saldo = 150;
+            this.setSaldo(this.getSaldo() + 150);
         }
         this.statusConta = "Aberta";
     }
@@ -74,23 +74,25 @@ public class Conta {
     }
     public void sacar(int valor){
         if(this.statusConta.equals("Aberta") && valor <= saldo){
-            saldo -= valor;
+            this.setSaldo(this.getSaldo() - valor);
             System.out.println("Você sacou " + valor + " reais.");
         }
     }
     public void depositar(int valor){
-        if(valor > 0){
-            saldo += valor;
+        if(valor > 0 && statusConta.equals("Aberta")){
+            this.setSaldo(this.getSaldo() + valor);
             System.out.println("Você depositou " + valor + " na conta.");
+        }else if(valor > 0 && statusConta.equals("Fechada")){
+            System.out.println("Primeiro abra a conta para poder depositar!");
         }else{
             System.out.println("Insira um valor válido para depositar na conta!");
         }
     }
     public void pagarMensalidade(){
         if(this.tipoConta.equals("Conta Corrente")){
-            saldo -= 12;
+            this.setSaldo(this.getSaldo() - 12);
         }else if(this.tipoConta.equals("Conta Poupança")){
-            saldo -= 20;
+            this.setSaldo(this.getSaldo() - 20);
         }
     }
     public Conta(){
